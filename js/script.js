@@ -2,7 +2,6 @@ var list = new Array();
 var pageList = new Array();
 var currentPage =1;
 var numberPerPage = 10;
-var numberOfPages = 0;
 
 // Getting JSON data from the API
 var xhr = new XMLHttpRequest();
@@ -16,18 +15,11 @@ xhr.onload = function(){
   // Using foreach the value from the data is added into the array "list"
   data.forEach(user => {
     list.push(user);
-    
+    setCurrentPage(1)
   });
 
 }
 
-// This function is used to get the number of pages that we are needed to display the entire API data
-// having 10 data in one page 
-function makeList(){
-
-  numberOfPages = Math.ceil(list.length/ numberPerPage);
-  
-}
 
 // SetPageNumber is used to set the prev, next and numerical buttons
 function setPageNumber(){
@@ -38,8 +30,9 @@ function setPageNumber(){
   //  *********FIRST PAGE BUTTON*********
 
   // Here firstpage is used to create a button that is going to redirect the page to firstpage
-  var firstpage = document.createElement('button');
+  var firstpage = document.createElement('a');
   firstpage.innerText = "First"
+  firstpage.href = "#"
 
   // Here the class name for the button is set using serAttribute
   firstpage.setAttribute("class","btn btn-primary firstpage")
@@ -55,8 +48,9 @@ function setPageNumber(){
 
   // Here prevPage is used to create a button that is going to redirect the page to previouspage
   // It has the same functionality as the previous page and here it redirects to firstpage
-  var prevPage = document.createElement('button');
+  var prevPage = document.createElement('a');
   prevPage.innerText = "Previous";
+  prevPage.href = "#"
   
   // Here the class name for the button is set using serAttribute
   prevPage.setAttribute("class","btn btn-primary prevPage")
@@ -71,11 +65,12 @@ function setPageNumber(){
 
   // Using for loop have created multiple button having numeric values having same functionality as the above
   // Here the button's onclick will redirect to the setCurrentPage method using the paramter value of i
-  for(let i=1; i<=numberOfPages; i++){
+  for(let i=1; i<=10; i++){
 
-    var page = document.createElement('button');
+    var page = document.createElement('a');
     page.innerText = i
     page.setAttribute("class","active")
+    page.href= "#"
     page.onclick = function(){
       
       setCurrentPage(i)
@@ -86,22 +81,24 @@ function setPageNumber(){
   
   // Here nextpage is used to create a button that is going to redirect the page to nextpage
   // It has the same functionality as the previous page and here it redirects to nextpage
-  var nextpage = document.createElement('button');
-  nextpage.innerText = "Next"
-  nextpage.setAttribute("class","btn btn-primary nextpage")
+  var nextpage = document.createElement('a');
+  nextpage.innerText = "Next";
+  nextpage.href = "#";
+  nextpage.setAttribute("class","btn btn-primary nextpage");
   nextpage.onclick = function(){
-    nextPage()
+    nextPage();
   }
   
   pageCounter.appendChild(nextpage)
 
   // Here lastpage is used to create a button that is going to redirect the page to lastpage
   // It has the same functionality as the previous page and here it redirects to lastpage
-  var lastpage = document.createElement('button');
-  lastpage.innerText = "Last"
-  lastpage.setAttribute("class","btn btn-primary lastpage")
+  var lastpage = document.createElement('a');
+  lastpage.innerText = "Last";
+  lastpage.href = "#";
+  lastpage.setAttribute("class","btn btn-primary lastpage");
   lastpage.onclick = function(){
-    lastPage()
+    lastPage();
   }
   
   pageCounter.appendChild(lastpage)
@@ -150,9 +147,14 @@ function lastPage() {
 // It gets the value from the setPageNumber function based on the input it sets the current page value
 // It redirects to the loadList function
 function setCurrentPage(a){
-  currentPage = a;
+  if(a== null || a==undefined){
+    currentPage = 1;
     
+  }else{
+    currentPage = a;
+  }
   loadList();
+  
 }
 
 // this function checks the count of dipslaying content and remove displaying data
@@ -168,7 +170,7 @@ function loadList() {
   // Check if the count has values more than 10 
   // If yes all the values are removed as we don't need the existing page values, since the user requested
   // for other page
-  if(count.length>= 10){
+  if(count.length> 9){
     for(let i=0; i<count.length; i++){
       listCount.removeChild(count[i])
     }
@@ -223,9 +225,8 @@ function drawList() {
 
 // This is to call the functions on load 
 function load() {
-  makeList();
   loadList();
-  setPageNumber(1);
+  setPageNumber();
 }
 
 // On window load it calls the load function
