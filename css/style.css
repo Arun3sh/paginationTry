@@ -1,4 +1,4 @@
-header, .header, nav{
+header, .header{
   background-image: linear-gradient(to right, rgb(228, 114, 171), rgb(199, 64, 199));
 }
 
@@ -14,9 +14,9 @@ p{
   margin-top: 20px
 }
 
-.pageCounter button{
+.pageCounter a{
   border: none;
-  margin: 2px;
+  margin: 5px;
 }
 
 .pageCounter :hover{
