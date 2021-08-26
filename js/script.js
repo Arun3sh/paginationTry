@@ -225,7 +225,7 @@ function drawList() {
 function load() {
   makeList();
   loadList();
-  setPageNumber();
+  setPageNumber(1);
 }
 
 // On window load it calls the load function
