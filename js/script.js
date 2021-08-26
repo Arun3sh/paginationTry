@@ -2,6 +2,7 @@ var list = new Array();
 var pageList = new Array();
 var currentPage =1;
 var numberPerPage = 10;
+var numberOfPages = 10;
 
 // Getting JSON data from the API
 var xhr = new XMLHttpRequest();
