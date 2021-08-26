@@ -1,0 +1,24 @@
+header, .header, nav{
+  background-image: linear-gradient(to right, rgb(228, 114, 171), rgb(199, 64, 199));
+}
+
+.jsonContent{
+  border: 1px solid black;
+  border-radius: 10px;
+  margin: 25px;
+  box-shadow:  10px -6px 15px 0px blueviolet;
+}
+
+p{
+  margin-left: 20px;
+  margin-top: 20px
+}
+
+.pageCounter button{
+  border: none;
+  margin: 2px;
+}
+
+.pageCounter :hover{
+  background-color: rgb(24, 114, 218);
+}
